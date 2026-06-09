@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workflow — Gestión de Proyectos</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ══ LOGIN ══════════════════════════════════════════════ -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="login-icon">W</div>
+      <h1>Workflow</h1>
+      <p>Gestión de proyectos del equipo</p>
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input id="l-email" type="email" placeholder="tu@email.com"
+        onkeydown="if(event.key==='Enter')document.getElementById('l-pass').focus()">
+    </div>
+    <div class="form-group">
+      <label>Contraseña</label>
+      <input id="l-pass" type="password" placeholder="••••••••"
+        onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <button class="btn-login" id="l-btn" onclick="doLogin()">Ingresar</button>
+    <div id="l-err"></div>
+  </div>
+</div>
+
+<!-- ══ APP ════════════════════════════════════════════════ -->
+<div id="app" style="display:none">
+
+  <!-- SIDEBAR -->
+  <aside id="sidebar">
+    <div class="sidebar-header">
+      <span class="sidebar-logo">W</span>
+      <span class="sidebar-title">Workflow</span>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">VISTAS</div>
+      <a class="nav-item active" id="nav-carpetas" onclick="setView('carpetas')">
+        <span>▤</span> Carpetas
+      </a>
+      <a class="nav-item" id="nav-calendario" onclick="setView('calendario')">
+        <span>◫</span> Calendario
+      </a>
+      <a class="nav-item" id="nav-mistareas" onclick="setView('mistareas')">
+        <span>◎</span> Mis tareas
+      </a>
+    </nav>
+    <div id="sidebar-folders-section" style="padding:0 8px"></div>
+    <div class="sidebar-bottom">
+      <div class="nav-section-label">CUENTA</div>
+      <div class="user-info" id="sidebar-user"></div>
+      <a class="nav-item admin-only" id="nav-admin" onclick="setView('admin')" style="display:none">
+        <span>⚙</span> Usuarios
+      </a>
+      <a class="nav-item" onclick="doLogout()"><span>→</span> Salir</a>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main id="main-content">
+    <div id="view-carpetas"  class="view-panel"></div>
+    <div id="view-calendario" class="view-panel" style="display:none"></div>
+    <div id="view-mistareas"  class="view-panel" style="display:none"></div>
+    <div id="view-admin"      class="view-panel" style="display:none"></div>
+  </main>
+</div>
+
+<!-- ══ MODAL ══════════════════════════════════════════════ -->
+<div id="modal-overlay" class="modal-overlay hidden" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box" id="modal-box">
+    <div class="modal-header">
+      <h3 id="modal-title"></h3>
+      <button class="modal-close-btn" onclick="closeModal()">✕</button>
+    </div>
+    <div id="modal-body" class="modal-body"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast" class="toast hidden"></div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
